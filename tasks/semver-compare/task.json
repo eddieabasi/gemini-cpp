@@ -1,0 +1,21 @@
+{
+  "id": "semver-compare",
+  "title": "Semantic Versioning 2.0.0 validation and precedence",
+  "tags": ["parsing", "spec-conformance", "edge-cases"],
+  "timeout_ms": 10000,
+  "prompt": [
+    "Implement a header-only function `std::optional<int> compare_semver(std::string_view a, std::string_view b)` in the global namespace that implements Semantic Versioning 2.0.0 precedence (https://semver.org).",
+    "",
+    "Return -1, 0 or 1 when a has lower, equal or higher precedence than b. Return std::nullopt if either string is not a valid SemVer 2.0.0 version.",
+    "",
+    "Validation rules (from the spec):",
+    "- `MAJOR.MINOR.PATCH` are non-negative integers without leading zeros.",
+    "- An optional pre-release follows a '-': one or more dot-separated, non-empty identifiers of [0-9A-Za-z-]. Numeric identifiers must not have leading zeros.",
+    "- Optional build metadata follows a '+': one or more dot-separated, non-empty identifiers of [0-9A-Za-z-]; leading zeros are allowed. Build metadata is ignored for precedence.",
+    "- No leading 'v', no whitespace, nothing else.",
+    "",
+    "Precedence: compare MAJOR, MINOR, PATCH numerically; a version with a pre-release has lower precedence than the same version without one; pre-release identifiers are compared left to right: numeric identifiers numerically, alphanumeric identifiers in ASCII order, numeric identifiers always lower than alphanumeric ones, and a shorter list of identifiers is lower if all preceding identifiers are equal.",
+    "",
+    "Numeric components may be arbitrarily large (larger than 64 bits) and must still compare correctly."
+  ]
+}

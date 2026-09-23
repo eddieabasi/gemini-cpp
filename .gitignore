@@ -1,0 +1,12 @@
+build*/
+cmake-build-*/
+out/
+.cache/
+compile_commands.json
+.vscode/
+.idea/
+*.swp
+.DS_Store
+report*.md
+report*.json
+__pycache__/

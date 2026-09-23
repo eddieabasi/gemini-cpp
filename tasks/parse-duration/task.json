@@ -1,0 +1,20 @@
+{
+  "id": "parse-duration",
+  "title": "Go-style duration parser",
+  "tags": ["parsing", "overflow", "edge-cases"],
+  "timeout_ms": 10000,
+  "prompt": [
+    "Implement a header-only function `std::optional<std::chrono::nanoseconds> parse_duration(std::string_view text)` in the global namespace that parses Go-style duration strings.",
+    "",
+    "Grammar: an optional sign ('+' or '-') followed by one or more `<number><unit>` pairs with no separators or whitespace.",
+    "- A number is decimal digits with an optional fractional part: \"1\", \"1.5\", \".5\" and \"5.\" are valid; there must be at least one digit.",
+    "- Units: \"ns\", \"us\", \"µs\" (U+00B5 MICRO SIGN, UTF-8), \"μs\" (U+03BC GREEK SMALL LETTER MU, UTF-8), \"ms\", \"s\", \"m\", \"h\".",
+    "- The string \"0\" (optionally signed) is valid and means zero. Any other number without a unit is invalid.",
+    "- Units may repeat and appear in any order (\"1h1h\" is two hours).",
+    "- Fractions are truncated toward zero at nanosecond precision (\"1.9999999999s\" is 1999999999ns).",
+    "- The result must fit in a signed 64-bit count of nanoseconds; \"-9223372036854775808ns\" is valid, anything outside the range is invalid.",
+    "- Return std::nullopt for any invalid input: empty string, lone sign, unknown unit, missing unit, whitespace, malformed number, or overflow.",
+    "",
+    "Examples: \"1h30m\" = 5400s, \"1.5s\" = 1500ms, \"-2m3.5s\" = -123500ms, \"300ms\", \"2h45m0.5s\"."
+  ]
+}

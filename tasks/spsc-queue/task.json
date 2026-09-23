@@ -1,0 +1,17 @@
+{
+  "id": "spsc-queue",
+  "title": "Lock-free single-producer single-consumer queue",
+  "tags": ["concurrency", "lock-free", "atomics"],
+  "timeout_ms": 20000,
+  "prompt": [
+    "Implement a header-only `template <typename T, std::size_t Capacity> class SpscQueue` in the global namespace: a bounded, lock-free, single-producer single-consumer ring buffer.",
+    "",
+    "- `bool try_push(T value)` returns false (and leaves the queue unchanged) when full.",
+    "- `std::optional<T> try_pop()` returns std::nullopt when empty. Elements come out in FIFO order.",
+    "- `std::size_t size_approx() const` returns the number of elements (may be stale under concurrency but never larger than Capacity).",
+    "- `static constexpr std::size_t capacity()` returns Capacity.",
+    "- The queue must hold exactly Capacity elements (not Capacity - 1). Capacity is not necessarily a power of two.",
+    "- One producer thread and one consumer thread may call try_push / try_pop concurrently. Use std::atomic with appropriate memory orderings; no mutexes.",
+    "- T may be move-only and need not be default constructible. Elements still in the queue must be destroyed when the queue is destroyed."
+  ]
+}

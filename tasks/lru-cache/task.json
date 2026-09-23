@@ -1,0 +1,16 @@
+{
+  "id": "lru-cache",
+  "title": "O(1) LRU cache",
+  "tags": ["data-structures", "templates"],
+  "timeout_ms": 10000,
+  "prompt": [
+    "Implement a header-only class template `LruCache<Key, Value>` in the global namespace.",
+    "",
+    "- `explicit LruCache(std::size_t capacity)`; a capacity of 0 means the cache never stores anything.",
+    "- `std::optional<Value> get(const Key& key)` returns a copy of the value and marks the entry most recently used.",
+    "- `void put(const Key& key, Value value)` inserts or updates. Updating an existing key also marks it most recently used. Inserting into a full cache evicts the least recently used entry.",
+    "- `bool contains(const Key& key) const` must NOT change recency.",
+    "- `std::size_t size() const` and `std::size_t capacity() const`.",
+    "- All operations must be O(1) on average. `Key` is hashable with `std::hash` and equality comparable."
+  ]
+}

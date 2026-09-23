@@ -1,0 +1,17 @@
+{
+  "id": "thread-pool",
+  "title": "Thread pool with futures, draining shutdown and wait_idle",
+  "tags": ["concurrency", "templates", "futures"],
+  "timeout_ms": 20000,
+  "prompt": [
+    "Implement a header-only `class ThreadPool` in the global namespace.",
+    "",
+    "- `explicit ThreadPool(std::size_t threads)` starts `threads` worker threads (threads >= 1).",
+    "- `template <class F, class... Args> auto submit(F&& f, Args&&... args) -> std::future<std::invoke_result_t<F, Args...>>` enqueues `f(args...)` and returns a future for its result. Exceptions thrown by the task must propagate through the future. Must work with move-only callables, move-only arguments and void-returning callables.",
+    "- `void wait_idle()` blocks until the queue is empty and no task is running.",
+    "- `std::size_t thread_count() const`.",
+    "- The destructor runs every task that was already submitted, then joins all threads.",
+    "- Tasks may call submit() on the same pool (they will not block waiting for the resulting future).",
+    "- The pool is neither copyable nor movable."
+  ]
+}

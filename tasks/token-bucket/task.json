@@ -1,0 +1,17 @@
+{
+  "id": "token-bucket",
+  "title": "Thread-safe token bucket rate limiter with an injectable clock",
+  "tags": ["concurrency", "time", "floating-point"],
+  "timeout_ms": 15000,
+  "prompt": [
+    "Implement a header-only `class TokenBucket` in the global namespace for rate limiting.",
+    "",
+    "- Constructor: `TokenBucket(double rate_per_second, double burst, std::function<std::chrono::steady_clock::time_point()> clock = [] { return std::chrono::steady_clock::now(); })`.",
+    "- The bucket starts full (`burst` tokens). Tokens refill continuously at `rate_per_second`, never exceeding `burst`.",
+    "- `bool try_acquire(double tokens = 1.0)`: if at least `tokens` are available, consume them and return true; otherwise return false and consume nothing.",
+    "- `double available()`: current number of tokens (after refilling up to now).",
+    "- `std::chrono::nanoseconds time_until_available(double tokens = 1.0)`: zero if the tokens are available now, otherwise how long until they will be (rounded up to the next nanosecond). Return `std::chrono::nanoseconds::max()` if the request can never succeed (tokens > burst, or rate is 0 and there are not enough tokens).",
+    "- All member functions must be thread-safe (a std::mutex is fine).",
+    "- Only the injected clock may be used to read time. If the clock goes backwards, treat the elapsed time as zero (never remove tokens). Refilling must be computed from elapsed time so that many tiny refills add up to the same amount as one large one."
+  ]
+}
