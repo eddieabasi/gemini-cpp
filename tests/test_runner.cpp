@@ -94,7 +94,7 @@ TEST(Runner, RepairLoopFeedsBackCompilerOutput) {
   const auto second = nlohmann::json::parse(env.transport->requests[1].body);
   const auto repair_prompt = second["contents"][2]["parts"][0]["text"].get<std::string>();
   EXPECT_NE(repair_prompt.find("did not compile"), std::string::npos);
-  EXPECT_NE(repair_prompt.find("'c'"), std::string::npos) << repair_prompt;  // compiler diagnostic included
+  EXPECT_NE(repair_prompt.find("solution.hpp:2:"), std::string::npos) << repair_prompt;  // compiler diagnostic included
 }
 
 TEST(Runner, ApiErrorsAreReported) {
