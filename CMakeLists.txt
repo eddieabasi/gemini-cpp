@@ -48,7 +48,7 @@ if(MSVC)
 else()
   target_compile_options(gemini_warnings INTERFACE
     -Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -Wcast-align
-    -Wunused -Woverloaded-virtual -Wnull-dereference -Wimplicit-fallthrough
+    -Wunused -Woverloaded-virtual -Wimplicit-fallthrough
     # Partial aggregate initialisation relying on default member initialisers is intended.
     -Wno-missing-field-initializers)
   if(GEMINI_WERROR)

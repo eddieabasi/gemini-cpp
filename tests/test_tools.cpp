@@ -28,7 +28,9 @@ TEST(Expression, Errors) {
                           "1 2", "2 ** 3", "1..2", "system(\"ls\")"}) {
     auto r = evaluate_expression(bad);
     EXPECT_FALSE(r.has_value()) << bad;
-    if (!r) EXPECT_EQ(r.error().code, ErrorCode::kInvalidArgument);
+    if (!r) {
+      EXPECT_EQ(r.error().code, ErrorCode::kInvalidArgument);
+    }
   }
   EXPECT_FALSE(evaluate_expression(std::string(1000, '(') + "1" + std::string(1000, ')')).has_value());
   EXPECT_FALSE(evaluate_expression("10 ^ 400").has_value());  // overflow to inf
